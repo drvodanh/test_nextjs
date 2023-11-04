@@ -1,3 +1,11 @@
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  PromiseLikeOfReactNode,
+  Key,
+} from "react";
 import SearchWords from "./components/searchWords";
 
 export default async function Home({
@@ -18,12 +26,27 @@ export default async function Home({
     <div>
       <h1>hi</h1>
       <SearchWords />
-      {ss.map((i, s) => (
-        <div key={s}>
-          <p>{i[0]}</p>
-          <p>{i[3]}</p>
-        </div>
-      ))}
+      {ss.map(
+        (
+          i: (
+            | string
+            | number
+            | boolean
+            | ReactElement<any, string | JSXElementConstructor<any>>
+            | Iterable<ReactNode>
+            | ReactPortal
+            | PromiseLikeOfReactNode
+            | null
+            | undefined
+          )[],
+          s: Key | null | undefined
+        ) => (
+          <div key={s}>
+            <p>{i[0]}</p>
+            <p>{i[3]}</p>
+          </div>
+        )
+      )}
     </div>
   );
 }
